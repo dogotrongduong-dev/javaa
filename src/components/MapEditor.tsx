@@ -381,20 +381,20 @@ export const MapEditor: React.FC<MapEditorProps> = ({
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-4rem)] overflow-hidden bg-neutral-950">
+    <div className="flex-1 min-h-0 min-w-0 flex flex-col overflow-hidden bg-neutral-950">
       
       {/* Top Toolbar */}
-      <div className="h-14 bg-neutral-900 border-b border-neutral-800 px-4 flex items-center justify-between gap-4 shrink-0">
+      <div className="h-12 sm:h-14 bg-neutral-900 border-b border-neutral-800 px-3 sm:px-4 flex items-center justify-between gap-2 sm:gap-4 shrink-0">
         
         {/* Left: Map file selector & status */}
-        <div className="flex items-center space-x-3">
-          <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 sm:space-x-3 min-w-0">
+          <div className="flex items-center space-x-1.5 sm:space-x-2 shrink-0">
             <span className="text-xs font-semibold text-neutral-400">File:</span>
             <select
               id="map-file-select"
               value={filePath}
               onChange={(e) => onSelectMapFile(e.target.value)}
-              className="bg-neutral-800 border border-neutral-700 text-neutral-200 text-xs rounded-lg px-2.5 py-1 focus:outline-none focus:border-emerald-500 font-mono"
+              className="bg-neutral-800 border border-neutral-700 text-neutral-200 text-xs rounded-lg px-2.5 py-1 focus:outline-none focus:border-emerald-500 font-mono h-8"
             >
               {availableMapFiles.map((f) => (
                 <option key={f} value={f}>
@@ -404,7 +404,7 @@ export const MapEditor: React.FC<MapEditorProps> = ({
             </select>
           </div>
 
-          <div className="hidden sm:flex items-center space-x-2 text-xs font-mono text-neutral-400 bg-neutral-950 px-2.5 py-1 rounded-md border border-neutral-800">
+          <div className="hidden sm:flex items-center space-x-2 text-xs font-mono text-neutral-400 bg-neutral-950 px-2.5 py-1 rounded-md border border-neutral-800 shrink-0">
             <span>{mapData.width} × {mapData.height}</span>
             <span>•</span>
             <span>{mapData.tiles.length} tiles</span>
@@ -414,13 +414,13 @@ export const MapEditor: React.FC<MapEditorProps> = ({
         </div>
 
         {/* Center: Tools */}
-        <div className="flex items-center space-x-1 bg-neutral-950 p-1 rounded-lg border border-neutral-800">
+        <div className="flex items-center space-x-1 bg-neutral-950 p-1 rounded-lg border border-neutral-800 shrink-0">
           <button
             id="tool-pencil"
             onClick={() => setActiveTool('pencil')}
             title="Bút vẽ (Pencil)"
             className={`p-1.5 rounded-md transition ${
-              activeTool === 'pencil' ? 'bg-emerald-600 text-white' : 'text-neutral-400 hover:text-neutral-200'
+              activeTool === 'pencil' ? 'bg-emerald-600 text-white shadow-sm' : 'text-neutral-400 hover:text-neutral-200'
             }`}
           >
             <Paintbrush className="w-4 h-4" />
@@ -430,7 +430,7 @@ export const MapEditor: React.FC<MapEditorProps> = ({
             onClick={() => setActiveTool('bucket')}
             title="Đổ thùng sơn (Flood Fill)"
             className={`p-1.5 rounded-md transition ${
-              activeTool === 'bucket' ? 'bg-emerald-600 text-white' : 'text-neutral-400 hover:text-neutral-200'
+              activeTool === 'bucket' ? 'bg-emerald-600 text-white shadow-sm' : 'text-neutral-400 hover:text-neutral-200'
             }`}
           >
             <PaintBucket className="w-4 h-4" />
@@ -440,7 +440,7 @@ export const MapEditor: React.FC<MapEditorProps> = ({
             onClick={() => setActiveTool('eraser')}
             title="Tẩy về tile 0 (Eraser)"
             className={`p-1.5 rounded-md transition ${
-              activeTool === 'eraser' ? 'bg-emerald-600 text-white' : 'text-neutral-400 hover:text-neutral-200'
+              activeTool === 'eraser' ? 'bg-emerald-600 text-white shadow-sm' : 'text-neutral-400 hover:text-neutral-200'
             }`}
           >
             <Eraser className="w-4 h-4" />
@@ -450,7 +450,7 @@ export const MapEditor: React.FC<MapEditorProps> = ({
             onClick={() => setActiveTool('picker')}
             title="Hút mã tile (Eyedropper)"
             className={`p-1.5 rounded-md transition ${
-              activeTool === 'picker' ? 'bg-emerald-600 text-white' : 'text-neutral-400 hover:text-neutral-200'
+              activeTool === 'picker' ? 'bg-emerald-600 text-white shadow-sm' : 'text-neutral-400 hover:text-neutral-200'
             }`}
           >
             <Pipette className="w-4 h-4" />
@@ -467,9 +467,9 @@ export const MapEditor: React.FC<MapEditorProps> = ({
         </div>
 
         {/* Right: View toggles & Save */}
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-1.5 sm:space-x-2 shrink-0">
           {/* Zoom controls */}
-          <div className="flex items-center space-x-1 bg-neutral-950 px-1 py-0.5 rounded-lg border border-neutral-800">
+          <div className="flex items-center space-x-1 bg-neutral-950 px-1 py-0.5 rounded-lg border border-neutral-800 h-8">
             <button
               onClick={() => setZoom((z) => Math.max(50, z - 50))}
               className="p-1 text-neutral-400 hover:text-neutral-200"
@@ -490,7 +490,7 @@ export const MapEditor: React.FC<MapEditorProps> = ({
           <button
             onClick={() => setShowGrid(!showGrid)}
             title="Bật/tắt lưới"
-            className={`p-1.5 rounded-lg border text-xs ${
+            className={`p-1.5 rounded-lg border text-xs h-8 ${
               showGrid ? 'bg-neutral-800 border-neutral-700 text-emerald-400' : 'border-neutral-800 text-neutral-500'
             }`}
           >
@@ -500,7 +500,7 @@ export const MapEditor: React.FC<MapEditorProps> = ({
           <button
             onClick={() => setShowTileIds(!showTileIds)}
             title="Hiển thị số Tile ID"
-            className={`p-1.5 rounded-lg border text-xs ${
+            className={`p-1.5 rounded-lg border text-xs h-8 ${
               showTileIds ? 'bg-neutral-800 border-neutral-700 text-emerald-400' : 'border-neutral-800 text-neutral-500'
             }`}
           >
@@ -511,7 +511,7 @@ export const MapEditor: React.FC<MapEditorProps> = ({
           <button
             id="btn-save-map"
             onClick={handleSaveMap}
-            className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
+            className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition h-8 ${
               isModified
                 ? 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm'
                 : 'bg-neutral-800 hover:bg-neutral-700 text-neutral-300 border border-neutral-700'
@@ -533,28 +533,28 @@ export const MapEditor: React.FC<MapEditorProps> = ({
       </div>
 
       {/* Main workspace */}
-      <div className="flex-1 flex overflow-hidden">
+      <div className="flex-1 min-h-0 min-w-0 flex overflow-hidden">
         
         {/* Left Side: Palette & Properties */}
-        <div className="w-72 bg-neutral-900 border-r border-neutral-800 flex flex-col shrink-0 overflow-y-auto">
+        <div className="w-64 lg:w-72 bg-neutral-900 border-r border-neutral-800 flex flex-col shrink-0 min-h-0">
           
           {/* Selected Tile Indicator */}
-          <div className="p-4 border-b border-neutral-800 bg-neutral-900/50">
-            <span className="text-[11px] font-semibold text-neutral-400 uppercase tracking-wider block mb-2">
+          <div className="p-3 sm:p-3.5 border-b border-neutral-800 bg-neutral-900/50 shrink-0">
+            <span className="text-[10px] font-semibold text-neutral-400 uppercase tracking-wider block mb-1.5">
               Tile đang chọn
             </span>
-            <div className="flex items-center space-x-3 bg-neutral-950 p-2.5 rounded-xl border border-neutral-800">
+            <div className="flex items-center space-x-2.5 bg-neutral-950 p-2 rounded-xl border border-neutral-800">
               <div
-                className="w-10 h-10 rounded-lg border border-neutral-700 shadow-inner flex items-center justify-center font-bold text-white text-xs drop-shadow"
+                className="w-9 h-9 rounded-lg border border-neutral-700 shadow-inner flex items-center justify-center font-bold text-white text-xs drop-shadow shrink-0"
                 style={{ backgroundColor: getTileColor(selectedTileId) }}
               >
                 {selectedTileId}
               </div>
               <div className="min-w-0 flex-1">
-                <div className="text-sm font-semibold text-neutral-200 truncate">
+                <div className="text-xs font-semibold text-neutral-200 truncate">
                   {getTileLabel(selectedTileId)}
                 </div>
-                <div className="text-xs font-mono text-neutral-500">
+                <div className="text-[11px] font-mono text-neutral-500">
                   ID: {selectedTileId} ({formatHexByte(selectedTileId)})
                 </div>
               </div>
@@ -562,15 +562,15 @@ export const MapEditor: React.FC<MapEditorProps> = ({
           </div>
 
           {/* Tile Palette Swatches */}
-          <div className="p-4 flex-1">
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-[11px] font-semibold text-neutral-400 uppercase tracking-wider">
+          <div className="p-3 flex-1 min-h-0 overflow-y-auto">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[10px] font-semibold text-neutral-400 uppercase tracking-wider">
                 Bảng Tile ({uniqueTiles.length})
               </span>
               <span className="text-[10px] text-neutral-500">Chọn để vẽ</span>
             </div>
 
-            <div className="space-y-1.5">
+            <div className="space-y-1">
               {uniqueTiles.map((item) => {
                 const isSelected = selectedTileId === item.id;
                 return (
@@ -580,22 +580,22 @@ export const MapEditor: React.FC<MapEditorProps> = ({
                       setSelectedTileId(item.id);
                       if (activeTool === 'eraser') setActiveTool('pencil');
                     }}
-                    className={`w-full flex items-center justify-between p-2 rounded-lg border text-xs transition ${
+                    className={`w-full flex items-center justify-between p-1.5 sm:p-2 rounded-lg border text-xs transition ${
                       isSelected
                         ? 'bg-neutral-800 border-emerald-500/70 text-emerald-400 shadow-sm'
                         : 'border-neutral-800/80 hover:bg-neutral-800/40 text-neutral-300'
                     }`}
                   >
-                    <div className="flex items-center space-x-2.5 min-w-0">
+                    <div className="flex items-center space-x-2 min-w-0">
                       <div
-                        className="w-5 h-5 rounded border border-neutral-700/80 shrink-0 shadow-inner"
+                        className="w-4 h-4 rounded border border-neutral-700/80 shrink-0 shadow-inner"
                         style={{ backgroundColor: item.color }}
                       />
-                      <span className="truncate font-medium">{item.label}</span>
+                      <span className="truncate font-medium text-xs">{item.label}</span>
                     </div>
-                    <div className="flex items-center space-x-2 font-mono text-[11px] text-neutral-500">
+                    <div className="flex items-center space-x-2 font-mono text-[10px] text-neutral-500 shrink-0">
                       <span>x{item.count}</span>
-                      <span className="w-6 text-right text-neutral-400">#{item.id}</span>
+                      <span className="w-5 text-right text-neutral-400">#{item.id}</span>
                     </div>
                   </button>
                 );
@@ -603,8 +603,8 @@ export const MapEditor: React.FC<MapEditorProps> = ({
             </div>
 
             {/* Custom Tile ID input */}
-            <div className="mt-4 pt-4 border-t border-neutral-800">
-              <label className="text-[11px] font-medium text-neutral-400 block mb-1.5">
+            <div className="mt-3 pt-3 border-t border-neutral-800">
+              <label className="text-[10px] font-medium text-neutral-400 block mb-1">
                 Nhập Tile ID tuỳ ý (0 - 255):
               </label>
               <div className="flex space-x-2">
@@ -614,22 +614,22 @@ export const MapEditor: React.FC<MapEditorProps> = ({
                   max="255"
                   value={selectedTileId}
                   onChange={(e) => setSelectedTileId(Math.max(0, Math.min(255, parseInt(e.target.value) || 0)))}
-                  className="w-full bg-neutral-950 border border-neutral-700 rounded-lg px-2.5 py-1 text-xs text-neutral-200 font-mono focus:border-emerald-500 focus:outline-none"
+                  className="w-full bg-neutral-950 border border-neutral-700 rounded-lg px-2.5 py-1 text-xs text-neutral-200 font-mono focus:border-emerald-500 focus:outline-none h-7"
                 />
               </div>
             </div>
           </div>
 
           {/* Map Structure Settings Accordion */}
-          <div className="p-4 border-t border-neutral-800 bg-neutral-950/40">
-            <div className="flex items-center space-x-1.5 text-xs font-semibold text-neutral-300 mb-3">
-              <Settings2 className="w-4 h-4 text-emerald-400" />
+          <div className="p-3 border-t border-neutral-800 bg-neutral-950/60 shrink-0">
+            <div className="flex items-center space-x-1.5 text-xs font-semibold text-neutral-300 mb-2">
+              <Settings2 className="w-3.5 h-3.5 text-emerald-400" />
               <span>Cấu trúc nhị phân</span>
             </div>
 
-            <div className="space-y-3 text-xs">
+            <div className="space-y-2 text-xs">
               <div>
-                <label className="text-neutral-400 block mb-1">Header Offset (Bytes):</label>
+                <label className="text-neutral-400 text-[10px] block mb-0.5">Header Offset:</label>
                 <select
                   value={headerOffset}
                   onChange={(e) => {
@@ -638,52 +638,52 @@ export const MapEditor: React.FC<MapEditorProps> = ({
                     setMapData((prev) => ({ ...prev, headerOffset: val }));
                     setIsModified(true);
                   }}
-                  className="w-full bg-neutral-900 border border-neutral-700 rounded-lg px-2 py-1 text-neutral-200 font-mono"
+                  className="w-full bg-neutral-900 border border-neutral-700 rounded-lg px-2 py-1 text-neutral-200 font-mono text-xs h-7"
                 >
-                  <option value={2}>2 bytes [Width (u8), Height (u8)]</option>
-                  <option value={4}>4 bytes [Width (u16be), Height (u16be)]</option>
-                  <option value={0}>0 bytes (Headerless raw tile grid)</option>
+                  <option value={2}>2B [W (u8), H (u8)]</option>
+                  <option value={4}>4B [W (u16be), H (u16be)]</option>
+                  <option value={0}>0B (Headerless raw)</option>
                 </select>
               </div>
 
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 gap-1.5">
                 <div>
-                  <label className="text-neutral-400 block mb-1">Rộng (Width):</label>
+                  <label className="text-neutral-400 text-[10px] block mb-0.5">Rộng (W):</label>
                   <input
                     type="number"
                     value={customWidth}
                     onChange={(e) => setCustomWidth(parseInt(e.target.value) || 1)}
-                    className="w-full bg-neutral-900 border border-neutral-700 rounded-lg px-2 py-1 text-neutral-200 font-mono"
+                    className="w-full bg-neutral-900 border border-neutral-700 rounded-lg px-2 py-0.5 text-neutral-200 font-mono text-xs h-7"
                   />
                 </div>
                 <div>
-                  <label className="text-neutral-400 block mb-1">Cao (Height):</label>
+                  <label className="text-neutral-400 text-[10px] block mb-0.5">Cao (H):</label>
                   <input
                     type="number"
                     value={customHeight}
                     onChange={(e) => setCustomHeight(parseInt(e.target.value) || 1)}
-                    className="w-full bg-neutral-900 border border-neutral-700 rounded-lg px-2 py-1 text-neutral-200 font-mono"
+                    className="w-full bg-neutral-900 border border-neutral-700 rounded-lg px-2 py-0.5 text-neutral-200 font-mono text-xs h-7"
                   />
                 </div>
               </div>
 
               <button
                 onClick={handleApplyDimensions}
-                className="w-full py-1.5 bg-neutral-800 hover:bg-neutral-700 text-neutral-200 text-xs font-medium rounded-lg border border-neutral-700 transition"
+                className="w-full py-1 bg-neutral-800 hover:bg-neutral-700 text-neutral-200 text-xs font-medium rounded-lg border border-neutral-700 transition"
               >
                 Cập nhật kích thước
               </button>
 
-              <div className="pt-2 border-t border-neutral-800 flex gap-2">
+              <div className="pt-1.5 border-t border-neutral-800 flex gap-1.5">
                 <button
                   onClick={handleExportRawMap}
                   title="Xuất file nhị phân thô"
-                  className="flex-1 py-1 bg-neutral-900 hover:bg-neutral-800 text-[11px] text-neutral-400 hover:text-neutral-200 rounded border border-neutral-800 flex items-center justify-center space-x-1"
+                  className="flex-1 py-1 bg-neutral-900 hover:bg-neutral-800 text-[10px] text-neutral-400 hover:text-neutral-200 rounded border border-neutral-800 flex items-center justify-center space-x-1"
                 >
                   <Download className="w-3 h-3" />
                   <span>Dump .bin</span>
                 </button>
-                <label className="flex-1 py-1 bg-neutral-900 hover:bg-neutral-800 text-[11px] text-neutral-400 hover:text-neutral-200 rounded border border-neutral-800 flex items-center justify-center space-x-1 cursor-pointer">
+                <label className="flex-1 py-1 bg-neutral-900 hover:bg-neutral-800 text-[10px] text-neutral-400 hover:text-neutral-200 rounded border border-neutral-800 flex items-center justify-center space-x-1 cursor-pointer">
                   <Upload className="w-3 h-3" />
                   <span>Nạp .bin</span>
                   <input type="file" onChange={handleImportRawMap} className="hidden" />
@@ -695,8 +695,8 @@ export const MapEditor: React.FC<MapEditorProps> = ({
         </div>
 
         {/* Center: Canvas Viewport */}
-        <div className="flex-1 relative overflow-auto p-8 flex items-center justify-center bg-neutral-950/90">
-          <div className="relative border border-neutral-800 shadow-2xl rounded-sm overflow-hidden bg-black/40">
+        <div className="flex-1 min-w-0 min-h-0 relative overflow-auto p-4 sm:p-8 bg-neutral-950/90 flex">
+          <div className="m-auto relative border border-neutral-800 shadow-2xl rounded-sm overflow-hidden bg-black/40 shrink-0">
             <canvas
               ref={canvasRef}
               id="map-canvas"
@@ -709,13 +709,13 @@ export const MapEditor: React.FC<MapEditorProps> = ({
           </div>
 
           {/* Coordinate Overlay HUD */}
-          <div className="absolute bottom-4 left-4 bg-neutral-900/90 backdrop-blur border border-neutral-800 px-3 py-1.5 rounded-lg text-xs font-mono text-neutral-300 shadow-lg flex items-center space-x-3">
+          <div className="pointer-events-none absolute bottom-4 left-4 bg-neutral-900/90 backdrop-blur border border-neutral-800 px-3 py-1.5 rounded-lg text-xs font-mono text-neutral-300 shadow-lg flex items-center space-x-3 z-10">
             {hoverCoord ? (
               <>
-                <span>X: <span className="text-emerald-400">{hoverCoord.x}</span></span>
-                <span>Y: <span className="text-emerald-400">{hoverCoord.y}</span></span>
-                <span>Tile: <span className="text-amber-400">{hoverCoord.tile} ({formatHexByte(hoverCoord.tile)})</span></span>
-                <span className="text-neutral-500 font-sans">{getTileLabel(hoverCoord.tile)}</span>
+                <span>X: <span className="text-emerald-400 font-semibold">{hoverCoord.x}</span></span>
+                <span>Y: <span className="text-emerald-400 font-semibold">{hoverCoord.y}</span></span>
+                <span>Tile: <span className="text-amber-400 font-semibold">{hoverCoord.tile} ({formatHexByte(hoverCoord.tile)})</span></span>
+                <span className="text-neutral-400 font-sans hidden sm:inline">{getTileLabel(hoverCoord.tile)}</span>
               </>
             ) : (
               <span className="text-neutral-500">Rê chuột lên bản đồ để soi toạ độ</span>

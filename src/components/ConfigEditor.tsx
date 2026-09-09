@@ -171,20 +171,20 @@ export const ConfigEditor: React.FC<ConfigEditorProps> = ({
   }, [bytes]);
 
   return (
-    <div className="flex flex-col h-[calc(100vh-4rem)] bg-neutral-950 overflow-hidden">
+    <div className="flex-1 min-h-0 min-w-0 flex flex-col bg-neutral-950 overflow-hidden">
       
       {/* Top Toolbar */}
-      <div className="h-14 bg-neutral-900 border-b border-neutral-800 px-4 flex items-center justify-between gap-4 shrink-0">
+      <div className="h-12 sm:h-14 bg-neutral-900 border-b border-neutral-800 px-3 sm:px-4 flex items-center justify-between gap-2 sm:gap-4 shrink-0">
         
         {/* Left: Config File Selector & Presets */}
-        <div className="flex items-center space-x-3">
-          <div className="flex items-center space-x-2">
-            <span className="text-xs font-semibold text-neutral-400">File Config:</span>
+        <div className="flex items-center space-x-2 sm:space-x-3 min-w-0">
+          <div className="flex items-center space-x-1.5 sm:space-x-2 shrink-0">
+            <span className="text-xs font-semibold text-neutral-400">File:</span>
             <select
               id="config-file-select"
               value={filePath}
               onChange={(e) => onSelectConfigFile(e.target.value)}
-              className="bg-neutral-800 border border-neutral-700 text-neutral-200 text-xs rounded-lg px-2.5 py-1 focus:outline-none focus:border-purple-500 font-mono"
+              className="bg-neutral-800 border border-neutral-700 text-neutral-200 text-xs rounded-lg px-2.5 py-1 focus:outline-none focus:border-purple-500 font-mono h-8"
             >
               {availableConfigFiles.map((f) => (
                 <option key={f} value={f}>
@@ -195,7 +195,7 @@ export const ConfigEditor: React.FC<ConfigEditorProps> = ({
           </div>
 
           {/* Mode Switch: Table vs Hex */}
-          <div className="flex items-center space-x-1 bg-neutral-950 p-1 rounded-lg border border-neutral-800">
+          <div className="flex items-center space-x-1 bg-neutral-950 p-1 rounded-lg border border-neutral-800 shrink-0">
             <button
               onClick={() => setViewMode('table')}
               className={`flex items-center space-x-1.5 px-2.5 py-1 rounded-md text-xs font-medium transition ${
@@ -205,7 +205,7 @@ export const ConfigEditor: React.FC<ConfigEditorProps> = ({
               }`}
             >
               <Table className="w-3.5 h-3.5" />
-              <span>Bảng thông số</span>
+              <span>Bảng</span>
             </button>
             <button
               onClick={() => setViewMode('hex')}
@@ -216,18 +216,18 @@ export const ConfigEditor: React.FC<ConfigEditorProps> = ({
               }`}
             >
               <Binary className="w-3.5 h-3.5" />
-              <span>Hex Dump</span>
+              <span>Hex</span>
             </button>
           </div>
 
           {/* Preset Selector */}
           {viewMode === 'table' && (
-            <div className="hidden lg:flex items-center space-x-2">
+            <div className="hidden lg:flex items-center space-x-2 shrink-0">
               <span className="text-xs text-neutral-400">Preset:</span>
               <select
                 value={selectedPresetId}
                 onChange={(e) => setSelectedPresetId(e.target.value)}
-                className="bg-neutral-950 border border-neutral-800 text-neutral-200 text-xs rounded px-2.5 py-1"
+                className="bg-neutral-950 border border-neutral-800 text-neutral-200 text-xs rounded-lg px-2.5 py-1 h-8"
               >
                 {DEFAULT_PRESETS.map((p) => (
                   <option key={p.id} value={p.id}>
@@ -240,8 +240,8 @@ export const ConfigEditor: React.FC<ConfigEditorProps> = ({
         </div>
 
         {/* Right: Actions */}
-        <div className="flex items-center space-x-2">
-          <div className="hidden sm:flex items-center space-x-2 text-xs font-mono text-neutral-400 bg-neutral-950 px-2.5 py-1 rounded-md border border-neutral-800">
+        <div className="flex items-center space-x-2 shrink-0">
+          <div className="hidden sm:flex items-center space-x-2 text-xs font-mono text-neutral-400 bg-neutral-950 px-2.5 py-1 rounded-md border border-neutral-800 shrink-0">
             <span>{bytes.length} bytes</span>
             <span>•</span>
             <span>{totalRecords} records</span>
@@ -250,7 +250,7 @@ export const ConfigEditor: React.FC<ConfigEditorProps> = ({
           <button
             id="btn-save-config"
             onClick={handleSaveToJar}
-            className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
+            className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition h-8 ${
               isModified
                 ? 'bg-purple-600 hover:bg-purple-500 text-white shadow-sm'
                 : 'bg-neutral-800 hover:bg-neutral-700 text-neutral-300 border border-neutral-700'
@@ -273,10 +273,10 @@ export const ConfigEditor: React.FC<ConfigEditorProps> = ({
       </div>
 
       {/* Main Workspace */}
-      <div className="flex-1 flex overflow-hidden">
+      <div className="flex-1 min-h-0 min-w-0 flex overflow-hidden">
         
         {/* Center: Table View or Hex View */}
-        <div className="flex-1 overflow-auto p-4 bg-neutral-950">
+        <div className="flex-1 min-h-0 min-w-0 overflow-auto p-3 sm:p-4 bg-neutral-950">
           
           {viewMode === 'table' ? (
             <div className="border border-neutral-800 rounded-xl overflow-hidden shadow-xl bg-neutral-900/60">

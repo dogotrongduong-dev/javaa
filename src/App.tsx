@@ -247,7 +247,7 @@ export default function App() {
   const modifiedCount = (Object.values(jarEntries) as JarFileEntry[]).filter((e) => e.isModified).length;
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-neutral-100 flex flex-col selection:bg-emerald-500/30 selection:text-emerald-300">
+    <div className="h-screen w-screen overflow-hidden bg-neutral-950 text-neutral-100 flex flex-col selection:bg-emerald-500/30 selection:text-emerald-300">
       
       {/* Hidden file input for switching JAR */}
       <input
@@ -277,18 +277,18 @@ export default function App() {
 
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-20 right-6 z-50 animate-bounce">
+        <div className="fixed top-16 right-4 sm:right-6 z-50 transition-all duration-200">
           <div
-            className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl shadow-2xl border text-xs font-medium backdrop-blur-md ${
+            className={`flex items-center space-x-2 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl shadow-2xl border text-xs font-medium backdrop-blur-md ${
               toastMessage.type === 'error'
-                ? 'bg-red-950/90 border-red-800 text-red-200'
+                ? 'bg-red-950/90 border-red-800 text-red-200 shadow-red-950/40'
                 : 'bg-emerald-950/90 border-emerald-700/80 text-emerald-200 shadow-emerald-950/50'
             }`}
           >
             {toastMessage.type === 'error' ? (
-              <AlertCircle className="w-4 h-4 text-red-400" />
+              <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
             ) : (
-              <CheckCircle className="w-4 h-4 text-emerald-400" />
+              <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0" />
             )}
             <span>{toastMessage.text}</span>
           </div>
@@ -296,10 +296,10 @@ export default function App() {
       )}
 
       {/* Main Content Area */}
-      <main className="flex-1 flex flex-col">
+      <main className="flex-1 min-h-0 min-w-0 flex flex-col overflow-hidden">
         {!jarFileName ? (
           /* Empty / Upload State */
-          <div className="flex-1 flex items-center justify-center p-4">
+          <div className="flex-1 min-h-0 min-w-0 overflow-y-auto p-4 sm:p-6 flex items-start sm:items-center justify-center">
             <DropZone
               onFileLoaded={handleFileLoaded}
               onLoadSample={handleLoadSample}
@@ -308,7 +308,7 @@ export default function App() {
           </div>
         ) : (
           /* Editor Tabs */
-          <div className="flex-1 flex flex-col">
+          <div className="flex-1 min-h-0 min-w-0 flex flex-col overflow-hidden">
             {activeTab === 'map' && (
               <MapEditor
                 key={selectedMapPath}

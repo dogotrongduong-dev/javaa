@@ -53,34 +53,34 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header className="bg-neutral-900 border-b border-neutral-800 sticky top-0 z-30 shadow-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between h-16 gap-4">
+    <header className="bg-neutral-900 border-b border-neutral-800 shrink-0 z-30 shadow-md select-none">
+      <div className="w-full px-4 sm:px-6">
+        <div className="flex items-center justify-between h-14 sm:h-16 gap-3 sm:gap-4">
           
           {/* Logo & Game Info */}
-          <div className="flex items-center space-x-3 min-w-0">
-            <div className="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-black text-sm tracking-wider shadow-inner">
+          <div className="flex items-center space-x-3 min-w-0 max-w-[260px] sm:max-w-xs md:max-w-sm shrink">
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-black text-xs sm:text-sm tracking-wider shadow-inner shrink-0">
               J2ME
             </div>
             <div className="min-w-0">
               <div className="flex items-center space-x-2">
-                <span className="font-bold text-neutral-100 text-base tracking-tight truncate">
+                <span className="font-bold text-neutral-100 text-sm sm:text-base tracking-tight truncate">
                   Bolac Studio
                 </span>
-                <span className="text-xs px-2 py-0.5 rounded-full bg-neutral-800 text-neutral-400 border border-neutral-700 font-mono">
+                <span className="text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.2 rounded-full bg-neutral-800 text-neutral-400 border border-neutral-700 font-mono shrink-0">
                   MIDP 2.0
                 </span>
               </div>
               {fileName ? (
-                <div className="flex items-center space-x-2 text-xs text-neutral-400 truncate">
+                <div className="flex items-center space-x-1.5 text-xs text-neutral-400 truncate">
                   <span className="truncate text-neutral-300 font-medium">{fileName}</span>
                   <span>•</span>
-                  <span>{formatBytes(fileSize)}</span>
+                  <span className="shrink-0">{formatBytes(fileSize)}</span>
                   {modifiedCount > 0 && (
                     <>
                       <span>•</span>
-                      <span className="text-amber-400 font-medium">
-                        {modifiedCount} mục đã sửa
+                      <span className="text-amber-400 font-medium shrink-0">
+                        {modifiedCount} đã sửa
                       </span>
                     </>
                   )}
@@ -93,7 +93,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Tab Navigation */}
           {fileName && (
-            <nav className="hidden md:flex items-center space-x-1 bg-neutral-950/80 p-1 rounded-xl border border-neutral-800">
+            <nav className="hidden md:flex items-center space-x-1 bg-neutral-950/80 p-1 rounded-xl border border-neutral-800 shrink-0">
               {tabs.map((tab) => {
                 const Icon = tab.icon;
                 const isActive = activeTab === tab.id;
@@ -102,7 +102,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     key={tab.id}
                     id={`nav-tab-${tab.id}`}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`flex items-center space-x-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                    className={`flex items-center space-x-1.5 lg:space-x-2 px-2.5 lg:px-3 py-1.5 rounded-lg text-xs font-medium transition-all whitespace-nowrap ${
                       isActive
                         ? 'bg-neutral-800 text-emerald-400 shadow-sm border border-neutral-700/60'
                         : 'text-neutral-400 hover:text-neutral-200 hover:bg-neutral-900/60'
@@ -110,7 +110,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   >
                     <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-emerald-400' : 'text-neutral-400'}`} />
                     <span>{tab.label}</span>
-                    <span className="text-[10px] font-mono opacity-50 hidden lg:inline">
+                    <span className="text-[10px] font-mono opacity-50 hidden xl:inline">
                       {tab.resource.split(',')[0]}
                     </span>
                   </button>
@@ -120,7 +120,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           )}
 
           {/* Actions */}
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 shrink-0">
             {!fileName ? (
               <button
                 id="btn-load-sample-nav"
@@ -136,7 +136,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   id="btn-switch-jar"
                   onClick={onUploadClick}
                   title="Tải lên file JAR khác"
-                  className="flex items-center space-x-1.5 px-3 py-1.5 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 text-xs font-medium rounded-lg border border-neutral-700 transition"
+                  className="flex items-center space-x-1.5 px-3 py-1.5 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 text-xs font-medium rounded-lg border border-neutral-700 transition whitespace-nowrap"
                 >
                   <Upload className="w-3.5 h-3.5" />
                   <span className="hidden sm:inline">Đổi JAR</span>
@@ -146,9 +146,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                   id="btn-export-jar"
                   onClick={onExportJar}
                   disabled={isExporting}
-                  className={`flex items-center space-x-2 px-3.5 py-1.5 text-xs font-semibold rounded-lg transition shadow-sm ${
+                  className={`flex items-center space-x-2 px-3 sm:px-3.5 py-1.5 text-xs font-semibold rounded-lg transition shadow-sm whitespace-nowrap ${
                     modifiedCount > 0
-                      ? 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-emerald-950/40 ring-1 ring-emerald-400/50 animate-pulse'
+                      ? 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-emerald-950/40 ring-1 ring-emerald-400/50'
                       : 'bg-neutral-800 hover:bg-neutral-700 text-neutral-200 border border-neutral-700'
                   }`}
                 >

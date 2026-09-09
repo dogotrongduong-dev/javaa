@@ -110,20 +110,20 @@ export const SpriteEditor: React.FC<SpriteEditorProps> = ({
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-4rem)] bg-neutral-950 overflow-hidden">
+    <div className="flex-1 min-h-0 min-w-0 flex flex-col bg-neutral-950 overflow-hidden">
       
       {/* Top Toolbar */}
-      <div className="h-14 bg-neutral-900 border-b border-neutral-800 px-4 flex items-center justify-between gap-4 shrink-0">
+      <div className="h-12 sm:h-14 bg-neutral-900 border-b border-neutral-800 px-3 sm:px-4 flex items-center justify-between gap-2 sm:gap-4 shrink-0">
         
         {/* Left: Pack selector & status */}
-        <div className="flex items-center space-x-3">
-          <div className="flex items-center space-x-2">
-            <span className="text-xs font-semibold text-neutral-400">File Pack:</span>
+        <div className="flex items-center space-x-2 sm:space-x-3 min-w-0">
+          <div className="flex items-center space-x-1.5 sm:space-x-2 shrink-0">
+            <span className="text-xs font-semibold text-neutral-400">Pack:</span>
             <select
               id="sprite-pack-select"
               value={filePath}
               onChange={(e) => onSelectSpriteFile(e.target.value)}
-              className="bg-neutral-800 border border-neutral-700 text-neutral-200 text-xs rounded-lg px-2.5 py-1 focus:outline-none focus:border-sky-500 font-mono"
+              className="bg-neutral-800 border border-neutral-700 text-neutral-200 text-xs rounded-lg px-2.5 py-1 focus:outline-none focus:border-sky-500 font-mono h-8"
             >
               {availableSpriteFiles.map((f) => (
                 <option key={f} value={f}>
@@ -135,20 +135,20 @@ export const SpriteEditor: React.FC<SpriteEditorProps> = ({
             </select>
           </div>
 
-          <div className="hidden sm:flex items-center space-x-2 text-xs font-mono text-neutral-400 bg-neutral-950 px-2.5 py-1 rounded-md border border-neutral-800">
+          <div className="hidden sm:flex items-center space-x-2 text-xs font-mono text-neutral-400 bg-neutral-950 px-2.5 py-1 rounded-md border border-neutral-800 shrink-0">
             <span>Tìm thấy {sprites.length} sprite PNG</span>
             <span>•</span>
-            <span>Kích thước file: {initialBytes.length}B</span>
+            <span>Kích thước: {initialBytes.length}B</span>
           </div>
         </div>
 
         {/* Right: Actions */}
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 shrink-0">
           {sprites.length > 0 && (
             <button
               onClick={handleExportAll}
               title="Tải toàn bộ sprites dạng PNG"
-              className="flex items-center space-x-1 px-2.5 py-1.5 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 text-xs font-medium rounded-lg border border-neutral-700 transition"
+              className="flex items-center space-x-1 px-2.5 py-1.5 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 text-xs font-medium rounded-lg border border-neutral-700 transition h-8"
             >
               <Download className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">Tải tất cả PNG</span>
@@ -158,7 +158,7 @@ export const SpriteEditor: React.FC<SpriteEditorProps> = ({
           <button
             id="btn-save-sprites"
             onClick={handleSaveSprites}
-            className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
+            className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition h-8 ${
               isModified
                 ? 'bg-sky-600 hover:bg-sky-500 text-white shadow-sm'
                 : 'bg-neutral-800 hover:bg-neutral-700 text-neutral-300 border border-neutral-700'
@@ -181,18 +181,18 @@ export const SpriteEditor: React.FC<SpriteEditorProps> = ({
       </div>
 
       {/* Main Container */}
-      <div className="flex-1 flex overflow-hidden">
+      <div className="flex-1 min-h-0 min-w-0 flex overflow-hidden">
         
         {/* Left Gallery: List of extracted sprites */}
-        <div className="w-80 bg-neutral-900 border-r border-neutral-800 flex flex-col shrink-0">
-          <div className="p-3 border-b border-neutral-800 bg-neutral-900/50 flex items-center justify-between">
+        <div className="w-72 lg:w-80 bg-neutral-900 border-r border-neutral-800 flex flex-col shrink-0 min-h-0">
+          <div className="p-3 border-b border-neutral-800 bg-neutral-900/50 flex items-center justify-between shrink-0">
             <span className="text-xs font-semibold text-neutral-300 uppercase tracking-wider">
               Danh sách Sprite ({sprites.length})
             </span>
             <span className="text-[10px] text-neutral-500">Chuẩn PNG MIDP</span>
           </div>
 
-          <div className="flex-1 overflow-y-auto p-3 space-y-2">
+          <div className="flex-1 min-h-0 overflow-y-auto p-2.5 sm:p-3 space-y-1.5">
             {sprites.length === 0 ? (
               <div className="text-center py-12 text-xs text-neutral-500">
                 Không tìm thấy cấu trúc PNG hợp lệ trong file này.
@@ -204,14 +204,14 @@ export const SpriteEditor: React.FC<SpriteEditorProps> = ({
                   <button
                     key={sprite.id}
                     onClick={() => setSelectedSpriteIndex(idx)}
-                    className={`w-full flex items-center space-x-3 p-2.5 rounded-xl border text-left transition ${
+                    className={`w-full flex items-center space-x-3 p-2 rounded-xl border text-left transition ${
                       isSelected
                         ? 'bg-neutral-800 border-sky-500/70 shadow-sm'
                         : 'border-neutral-800/80 hover:bg-neutral-800/40'
                     }`}
                   >
                     {/* Checkerboard thumbnail container */}
-                    <div className="w-12 h-12 rounded-lg border border-neutral-700/80 bg-[linear-gradient(45deg,#1e1e1e_25%,transparent_25%),linear-gradient(-45deg,#1e1e1e_25%,transparent_25%),linear-gradient(45deg,transparent_75%,#1e1e1e_75%),linear-gradient(-45deg,transparent_75%,#1e1e1e_75%)] bg-[size:10px_10px] bg-[#121212] flex items-center justify-center overflow-hidden shrink-0 shadow-inner">
+                    <div className="w-11 h-11 rounded-lg border border-neutral-700/80 bg-[linear-gradient(45deg,#1e1e1e_25%,transparent_25%),linear-gradient(-45deg,#1e1e1e_25%,transparent_25%),linear-gradient(45deg,transparent_75%,#1e1e1e_75%),linear-gradient(-45deg,transparent_75%,#1e1e1e_75%)] bg-[size:10px_10px] bg-[#121212] flex items-center justify-center overflow-hidden shrink-0 shadow-inner">
                       <img
                         src={sprite.blobUrl}
                         alt={`Sprite ${idx}`}
@@ -244,9 +244,9 @@ export const SpriteEditor: React.FC<SpriteEditorProps> = ({
         </div>
 
         {/* Right Detail / Replacement Canvas */}
-        <div className="flex-1 flex flex-col bg-neutral-950 overflow-y-auto p-6">
+        <div className="flex-1 min-h-0 min-w-0 flex flex-col bg-neutral-950 overflow-y-auto p-4 sm:p-6">
           {currentSprite ? (
-            <div className="max-w-2xl mx-auto w-full space-y-6">
+            <div className="max-w-2xl mx-auto w-full space-y-5">
               
               {/* Header Info */}
               <div className="flex items-center justify-between pb-4 border-b border-neutral-800">

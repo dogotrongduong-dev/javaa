@@ -86,14 +86,14 @@ export const JarExplorer: React.FC<JarExplorerProps> = ({
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-4rem)] bg-neutral-950 overflow-hidden">
+    <div className="flex-1 min-h-0 min-w-0 flex flex-col bg-neutral-950 overflow-hidden">
       
       {/* Top Banner / Summary */}
-      <div className="bg-neutral-900 border-b border-neutral-800 p-6 shrink-0">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div className="bg-neutral-900 border-b border-neutral-800 p-4 sm:p-5 shrink-0">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-3 sm:gap-4">
           <div>
             <div className="flex items-center space-x-2">
-              <h2 className="text-xl font-bold text-neutral-100 flex items-center space-x-2">
+              <h2 className="text-lg sm:text-xl font-bold text-neutral-100 flex items-center space-x-2">
                 <Package className="w-5 h-5 text-emerald-400" />
                 <span>JAR Builder & Cấu trúc File</span>
               </h2>
@@ -106,12 +106,12 @@ export const JarExplorer: React.FC<JarExplorerProps> = ({
             </p>
           </div>
 
-          <div className="flex items-center space-x-3 w-full md:w-auto">
+          <div className="flex items-center space-x-3 w-full md:w-auto shrink-0">
             <button
               id="btn-export-jar-builder"
               onClick={onExportJar}
               disabled={isExporting}
-              className="flex-1 md:flex-none flex items-center justify-center space-x-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold rounded-xl shadow-lg shadow-emerald-950/50 transition"
+              className="w-full md:w-auto flex items-center justify-center space-x-2 px-4 sm:px-5 py-2 sm:py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-semibold rounded-xl shadow-lg shadow-emerald-950/50 transition shrink-0"
             >
               <Download className="w-4 h-4" />
               <span>{isExporting ? 'Đang đóng gói JAR...' : 'Export JAR Hoàn chỉnh'}</span>
@@ -120,38 +120,38 @@ export const JarExplorer: React.FC<JarExplorerProps> = ({
         </div>
 
         {/* Stats Row */}
-        <div className="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6">
-          <div className="p-3 bg-neutral-950/60 rounded-xl border border-neutral-800">
-            <div className="text-xs text-neutral-400">Tổng số file</div>
-            <div className="text-lg font-bold text-neutral-100 font-mono">{fileList.length}</div>
+        <div className="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 mt-3 sm:mt-4">
+          <div className="p-2.5 sm:p-3 bg-neutral-950/60 rounded-xl border border-neutral-800">
+            <div className="text-[11px] sm:text-xs text-neutral-400">Tổng số file</div>
+            <div className="text-base sm:text-lg font-bold text-neutral-100 font-mono">{fileList.length}</div>
           </div>
 
-          <div className="p-3 bg-neutral-950/60 rounded-xl border border-neutral-800">
-            <div className="text-xs text-neutral-400">Đã chỉnh sửa</div>
-            <div className={`text-lg font-bold font-mono ${modifiedFiles.length > 0 ? 'text-amber-400' : 'text-neutral-500'}`}>
+          <div className="p-2.5 sm:p-3 bg-neutral-950/60 rounded-xl border border-neutral-800">
+            <div className="text-[11px] sm:text-xs text-neutral-400">Đã chỉnh sửa</div>
+            <div className={`text-base sm:text-lg font-bold font-mono ${modifiedFiles.length > 0 ? 'text-amber-400' : 'text-neutral-500'}`}>
               {modifiedFiles.length} file
             </div>
           </div>
 
-          <div className="p-3 bg-neutral-950/60 rounded-xl border border-neutral-800">
-            <div className="text-xs text-neutral-400">Tài nguyên J2ME cốt lõi</div>
-            <div className="text-lg font-bold text-emerald-400 font-mono">
+          <div className="p-2.5 sm:p-3 bg-neutral-950/60 rounded-xl border border-neutral-800">
+            <div className="text-[11px] sm:text-xs text-neutral-400">Tài nguyên cốt lõi</div>
+            <div className="text-base sm:text-lg font-bold text-emerald-400 font-mono">
               {fileList.filter((f) => ['ma', 'a', 'pi0', 'pi8', 'pi9', '0', '1'].includes(f.name)).length} mục
             </div>
           </div>
 
-          <div className="p-3 bg-neutral-950/60 rounded-xl border border-neutral-800">
-            <div className="text-xs text-neutral-400">Trạng thái đóng gói</div>
-            <div className="text-lg font-bold text-sky-400 flex items-center space-x-1">
+          <div className="p-2.5 sm:p-3 bg-neutral-950/60 rounded-xl border border-neutral-800">
+            <div className="text-[11px] sm:text-xs text-neutral-400">Trạng thái đóng gói</div>
+            <div className="text-base sm:text-lg font-bold text-sky-400 flex items-center space-x-1">
               <CheckCircle2 className="w-4 h-4" />
-              <span className="text-sm">Sẵn sàng</span>
+              <span className="text-xs sm:text-sm">Sẵn sàng</span>
             </div>
           </div>
         </div>
       </div>
 
       {/* Main Files Table */}
-      <div className="flex-1 overflow-auto p-6 max-w-6xl mx-auto w-full">
+      <div className="flex-1 min-h-0 min-w-0 overflow-auto p-4 sm:p-6 max-w-6xl mx-auto w-full">
         <div className="bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden shadow-xl">
           
           {/* Table Header Filter */}

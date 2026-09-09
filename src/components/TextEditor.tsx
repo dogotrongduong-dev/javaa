@@ -122,20 +122,20 @@ export const TextEditor: React.FC<TextEditorProps> = ({
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-4rem)] bg-neutral-950 overflow-hidden">
+    <div className="flex-1 min-h-0 min-w-0 flex flex-col bg-neutral-950 overflow-hidden">
       
       {/* Top Toolbar */}
-      <div className="h-14 bg-neutral-900 border-b border-neutral-800 px-4 flex items-center justify-between gap-4 shrink-0">
+      <div className="h-12 sm:h-14 bg-neutral-900 border-b border-neutral-800 px-3 sm:px-4 flex items-center justify-between gap-2 sm:gap-4 shrink-0">
         
         {/* Left: Text File Selector & Format */}
-        <div className="flex items-center space-x-3">
-          <div className="flex items-center space-x-2">
-            <span className="text-xs font-semibold text-neutral-400">File Text:</span>
+        <div className="flex items-center space-x-2 sm:space-x-3 min-w-0">
+          <div className="flex items-center space-x-1.5 sm:space-x-2 shrink-0">
+            <span className="text-xs font-semibold text-neutral-400">File:</span>
             <select
               id="text-file-select"
               value={filePath}
               onChange={(e) => onSelectTextFile(e.target.value)}
-              className="bg-neutral-800 border border-neutral-700 text-neutral-200 text-xs rounded-lg px-2.5 py-1 focus:outline-none focus:border-amber-500 font-mono"
+              className="bg-neutral-800 border border-neutral-700 text-neutral-200 text-xs rounded-lg px-2.5 py-1 focus:outline-none focus:border-amber-500 font-mono h-8"
             >
               {availableTextFiles.map((f) => (
                 <option key={f} value={f}>
@@ -146,7 +146,7 @@ export const TextEditor: React.FC<TextEditorProps> = ({
             </select>
           </div>
 
-          <div className="hidden sm:flex items-center space-x-2">
+          <div className="hidden sm:flex items-center space-x-2 shrink-0">
             <span className="text-xs text-neutral-400">Định dạng:</span>
             <select
               value={format}
@@ -154,7 +154,7 @@ export const TextEditor: React.FC<TextEditorProps> = ({
                 setFormat(e.target.value as any);
                 setIsModified(true);
               }}
-              className="bg-neutral-950 border border-neutral-800 text-neutral-300 text-xs rounded px-2 py-0.5 font-mono"
+              className="bg-neutral-950 border border-neutral-800 text-neutral-300 text-xs rounded-lg px-2 py-1 font-mono h-8"
             >
               <option value="utf-length-prefixed">J2ME UTF (2-byte length prefix)</option>
               <option value="null-terminated">Null-terminated UTF-8 (\0)</option>
@@ -164,10 +164,10 @@ export const TextEditor: React.FC<TextEditorProps> = ({
         </div>
 
         {/* Right: Actions */}
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 shrink-0">
           <button
             onClick={handleAddEntry}
-            className="flex items-center space-x-1 px-2.5 py-1.5 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 text-xs font-medium rounded-lg border border-neutral-700 transition"
+            className="flex items-center space-x-1 px-2.5 py-1.5 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 text-xs font-medium rounded-lg border border-neutral-700 transition h-8"
           >
             <Plus className="w-3.5 h-3.5" />
             <span className="hidden sm:inline">Thêm chuỗi</span>
@@ -176,7 +176,7 @@ export const TextEditor: React.FC<TextEditorProps> = ({
           <button
             onClick={handleExportTxt}
             title="Xuất danh sách text ra file .txt"
-            className="p-1.5 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 rounded-lg border border-neutral-700 transition"
+            className="p-1.5 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 rounded-lg border border-neutral-700 transition h-8 flex items-center justify-center"
           >
             <Download className="w-3.5 h-3.5" />
           </button>
@@ -184,7 +184,7 @@ export const TextEditor: React.FC<TextEditorProps> = ({
           <button
             id="btn-save-text"
             onClick={handleSaveToJar}
-            className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
+            className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition h-8 ${
               isModified
                 ? 'bg-amber-600 hover:bg-amber-500 text-white shadow-sm'
                 : 'bg-neutral-800 hover:bg-neutral-700 text-neutral-300 border border-neutral-700'
@@ -207,13 +207,13 @@ export const TextEditor: React.FC<TextEditorProps> = ({
       </div>
 
       {/* Main Workspace */}
-      <div className="flex-1 flex overflow-hidden">
+      <div className="flex-1 min-h-0 min-w-0 flex overflow-hidden">
         
         {/* Left: String List with Search */}
-        <div className="w-96 bg-neutral-900 border-r border-neutral-800 flex flex-col shrink-0">
+        <div className="w-80 lg:w-96 bg-neutral-900 border-r border-neutral-800 flex flex-col shrink-0 min-h-0">
           
           {/* Search box */}
-          <div className="p-3 border-b border-neutral-800">
+          <div className="p-3 border-b border-neutral-800 shrink-0">
             <div className="relative">
               <Search className="w-3.5 h-3.5 text-neutral-500 absolute left-3 top-1/2 -translate-y-1/2" />
               <input
@@ -221,7 +221,7 @@ export const TextEditor: React.FC<TextEditorProps> = ({
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Tìm kiếm nội dung chuỗi..."
-                className="w-full bg-neutral-950 border border-neutral-700 rounded-lg pl-8 pr-3 py-1.5 text-xs text-neutral-200 placeholder-neutral-500 focus:outline-none focus:border-amber-500"
+                className="w-full bg-neutral-950 border border-neutral-700 rounded-lg pl-8 pr-3 py-1.5 text-xs text-neutral-200 placeholder-neutral-500 focus:outline-none focus:border-amber-500 h-8"
               />
             </div>
             <div className="flex items-center justify-between text-[11px] text-neutral-400 mt-2 px-1">
@@ -238,7 +238,7 @@ export const TextEditor: React.FC<TextEditorProps> = ({
           </div>
 
           {/* List of Strings */}
-          <div className="flex-1 overflow-y-auto p-2 space-y-1">
+          <div className="flex-1 min-h-0 overflow-y-auto p-2 space-y-1">
             {filteredEntries.length === 0 ? (
               <div className="text-center py-10 text-xs text-neutral-500">
                 Không tìm thấy chuỗi nào phù hợp.
