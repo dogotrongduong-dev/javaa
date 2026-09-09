@@ -1,0 +1,6 @@
+{
+  "name": "Bolac J2ME JAR Game Data Editor",
+  "description": "Web panel chuyên dụng để đọc, chỉnh sửa dữ liệu Map, Sprite, Text, Config và đóng gói file JAR game J2ME Bolac.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
